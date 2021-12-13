@@ -1,4 +1,6 @@
 import { compose, pipe } from "lodash/fp";
+import { Map } from "immutable"; // the map function you receive from immutable package is immutable
+import { produce } from "immer";
 const input = " javascript ";
 const trim = (str) => str.trim();
 const lower = (str) => str.toLowerCase();
@@ -28,3 +30,89 @@ console.log(add1(1)(2)); // this is called concept of currying
 // cannot use random values
 // no current date/ time
 //no global state
+
+// immutability
+// once an project is created we cannot change or mutate it
+// if you want to change first then
+// then we have to take a copy first change the object
+// new strings are generally immutable
+
+// advantages
+// Immutability
+// faster change detection
+// concurrency control
+
+// cons
+// performance decrease
+// memory overhead
+
+// generally if your build application with redux the data should not mutate data
+// changing objects with immutability concept
+const person = {
+  name: "gokul",
+  address: {
+    city: "bangalore",
+    country: "india",
+  },
+};
+console.log(person);
+
+const newPerson = {
+  ...person,
+  name: "nemo",
+  age: 21,
+  address: {
+    ...person.address,
+    city: "NewYork",
+    country: "Usa",
+  },
+};
+
+console.log(newPerson);
+
+//  immutability when working with arrays
+const numbers = [1, 2, 3, 4, 56];
+//
+const addNumbers = [...numbers, 4];
+const testNumbers = [...numbers.slice(0, 2), 4, ...addNumbers.slice(2)];
+console.log(addNumbers);
+console.log(testNumbers);
+
+// working with immutableJs
+// problem with immutable its an entire new api which might not work well with other packages
+
+// working with emmer
+
+let book = {
+  name: "harry",
+};
+function publish(book) {
+  // mutability can be overcome buy using produce function under immer objects
+  // book.isPublished = true;
+  // produce(object, then a function to write a mutable code)
+  // and the produce function is going to return updated object
+  return produce(book, (item) => {
+    item.isPublished = true; // writing a mutable code for the immutable object
+  });
+}
+
+publish(book);
+console.log(book);
+
+
+
+// getting started with redux 
+// redux architecture
+// in redux we cannot mutate state 
+// so to update an function you have to create function that take a store in and return an updates store 
+// generally their is a named function called reducer
+// what reducer does is generally it will take current instance of the store and return the updated the store 
+// reducer has two arguments one is store and another one is actions 
+// generally the store is to have all the contents 
+// actions it is plain javascript which explains what just happened (like adding contents to shopping cart or so on )
+// based on the type of action reducer will what contents to update 
+// reducers are pure functions 
+// how everything works
+// actions 
+// store 
+// reducer 
