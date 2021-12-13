@@ -16,9 +16,9 @@ export const bugAdded = desc({
   },
 });
 
-export const bugResolved=id({
-    type:actions.bugResolved,
-    payload:{
-        id 
-    }
-})
+export const bugResolved = id({
+  type: actions.bugResolved,
+  payload: {
+    id,
+  },
+});
