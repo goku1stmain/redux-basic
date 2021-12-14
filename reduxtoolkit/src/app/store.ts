@@ -1,10 +1,13 @@
 // first thing to do his configure our store 
 import { configureStore } from "@reduxjs/toolkit";
 import reservationsReducer from "../features/reservation-slice";
+import customerReducer from "../features/customer-slice";
+
 export const store=configureStore({
     reducer:{
         // this will all the slices
         reservations:reservationsReducer,
+        customers:customerReducer,
     }
 }) //take in a object 
 // inside that we are going to have reducers 
